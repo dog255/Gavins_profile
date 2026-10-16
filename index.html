@@ -1,1 +1,1241 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07183f">
+<title>Brawl Stars — Profile</title>
+
+<style>
+:root {
+  --bg: #090719;
+  --panel: #25365f;
+  --panel2: #17254a;
+  --line: #15152c;
+  --cyan: #69eaff;
+  --blue: #178bff;
+  --gold: #ffe45a;
+  --white: #fffdfb;
+  --muted: #c4d6ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--white);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 15% 42%, rgba(0,224,255,.38), transparent 28%),
+    radial-gradient(circle at 82% 25%, rgba(130,50,255,.45), transparent 35%),
+    linear-gradient(115deg, #087be9 0%, #2d36bc 43%, #5b24b7 100%);
+  min-height: 100vh;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .14;
+  background-image:
+    radial-gradient(circle at 20% 25%, transparent 0 28px, #a9b8ff 29px 32px, transparent 33px),
+    radial-gradient(circle at 80% 75%, transparent 0 38px, #a9b8ff 39px 42px, transparent 43px);
+  background-size: 180px 165px;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.page {
+  width: min(1600px, 100%);
+  margin: auto;
+  padding: 16px;
+}
+
+.profile-shell {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(280px, .82fr) minmax(0, 2.1fr);
+  gap: 0;
+  padding: 0;
+  border: 5px solid #080a20;
+  border-radius: 7px;
+  background: #11172e;
+  box-shadow: 0 12px 0 #070817, 0 24px 60px #0008;
+  overflow: hidden;
+}
+
+.left-panel,
+.main-panel,
+.top-card,
+.section-card,
+.stats {
+  border: 3px solid #0b102b;
+  border-radius: 5px;
+  background: linear-gradient(145deg, rgba(28,61,126,.96), rgba(22,27,91,.98));
+  box-shadow: inset 0 0 0 2px rgba(111,177,255,.22);
+}
+
+.left-panel {
+  padding: 18px;
+  background:
+    radial-gradient(ellipse at 45% 25%, rgba(55,225,255,.8), transparent 42%),
+    linear-gradient(155deg, #087ff0, #1948d7 58%, #1d1a79);
+  border-radius: 0;
+  border-width: 0 5px 0 0;
+  border-right-color: #080a20;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+.avatar-frame {
+  max-width: none;
+  width: 100%;
+  padding: 0;
+  margin: 0 auto 14px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.avatar {
+  aspect-ratio: .82;
+  display: grid;
+  place-items: center;
+  border-radius: 4px;
+  background: radial-gradient(ellipse at 45% 40%, #a6f5ff, #2788ee 47%, #1238b5);
+  font-size: clamp(100px, 15vw, 220px);
+  text-shadow: 0 7px 0 #12377c;
+  border: 3px solid #182b64;
+  box-shadow: inset 0 0 25px #b1f6ff77;
+  overflow: hidden;
+}
+
+.player-name {
+  font-size: clamp(25px, 2.6vw, 38px);
+  font-weight: 950;
+  text-align: center;
+  text-shadow: 0 3px 0 #13205d;
+  margin: 0 0 15px;
+  overflow-wrap: anywhere;
+}
+
+.rule {
+  height: 3px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, transparent, #9cefff, transparent);
+  margin: 0 0 18px;
+}
+
+.subhead {
+  font-size: 14px;
+  font-weight: 900;
+  color: #f5f7ff;
+  text-shadow: 0 2px 0 #15245e;
+  letter-spacing: .7px;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+
+.left-bottom {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 3px;
+}
+
+.battle-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.battle-card {
+  aspect-ratio: 1;
+  border: 3px solid #10122b;
+  border-radius: 3px;
+  display: grid;
+  place-items: center;
+  font-size: clamp(22px, 3vw, 38px);
+  background: linear-gradient(145deg, #11172c, #364d8b);
+  box-shadow: inset 0 0 0 2px #e6d66a;
+}
+
+.title-box {
+  border: 3px solid #10245a;
+  border-radius: 4px;
+  background: #498be8;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.title-emblem {
+  font-size: 39px;
+  filter: drop-shadow(0 4px 0 #482500);
+}
+
+.title-name {
+  font-weight: 950;
+  color: #ffed77;
+  text-shadow: 0 2px #422a06;
+  font-size: clamp(12px, 1.2vw, 17px);
+  overflow-wrap: anywhere;
+}
+
+.main-panel {
+  padding: 15px;
+  min-width: 0;
+  border-radius: 0;
+  border: 0;
+  background: linear-gradient(140deg, #222a8f, #4335c5 52%, #2b1a8a);
+}
+
+.topbar {
+  display: grid;
+  grid-template-columns: .8fr 1.1fr 1.3fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.top-card {
+  background: linear-gradient(180deg, #394767, #202a49);
+  border-color: #10162d;
+  border-radius: 5px;
+  padding: 11px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.top-icon {
+  font-size: 35px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 3px 0 #07102b);
+}
+
+.eyebrow {
+  font-size: 12px;
+  color: #d6e3ff;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+}
+
+.top-value {
+  font-size: clamp(15px, 1.55vw, 23px);
+  font-weight: 950;
+  overflow-wrap: anywhere;
+}
+
+.gold {
+  color: var(--gold);
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 215px;
+  gap: 12px;
+  align-items: start;
+}
+
+.section-card {
+  padding: 13px;
+  min-width: 0;
+  background: linear-gradient(145deg, #2e48b4, #252178);
+  border-color: #10143a;
+  border-radius: 5px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0 0 12px;
+  font-size: clamp(15px, 1.5vw, 21px);
+  font-weight: 950;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 2px 0 #11194b;
+}
+
+.toggle {
+  border: 0;
+  color: #8bcaff;
+  background: transparent;
+  font-size: 26px;
+  line-height: 1;
+  padding: 0 4px;
+  transition: transform .2s;
+}
+
+.toggle[aria-expanded="true"] {
+  transform: rotate(180deg);
+}
+
+.highest {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.brawler-card {
+  border: 3px solid #9a3fff;
+  border-radius: 5px;
+  padding: 4px 4px 7px;
+  text-align: center;
+  background: linear-gradient(150deg, #8c49d7, #202264);
+  min-width: 0;
+}
+
+.brawler-card:nth-child(2n) {
+  border-color: #ff4b80;
+}
+
+.brawler-card:nth-child(3n) {
+  border-color: #1caeff;
+}
+
+.brawler-face {
+  aspect-ratio: 1;
+  border-radius: 3px;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 35% 20%, #a9d9ff, #3744a0 65%, #121a4a);
+  font-size: clamp(25px, 3vw, 46px);
+  margin-bottom: 5px;
+}
+
+.trophies {
+  font-weight: 950;
+  color: var(--gold);
+  font-size: clamp(11px, 1.15vw, 15px);
+  white-space: nowrap;
+}
+
+.roster-preview {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.mini-brawler {
+  aspect-ratio: 1;
+  border: 1px solid #1598c6;
+  border-radius: 3px;
+  background: linear-gradient(145deg, #438de7, #26216c);
+  display: grid;
+  place-items: center;
+  font-size: clamp(12px, 1.5vw, 22px);
+  min-width: 0;
+  box-shadow: inset 0 0 0 1px #07132d;
+}
+
+.roster-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #8fcaff;
+  font-weight: 900;
+  margin: 10px auto 0;
+  border: 0;
+  background: transparent;
+}
+
+.roster {
+  margin-top: 14px;
+  display: none;
+}
+
+.roster.open {
+  display: block;
+}
+
+.roster-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.filter {
+  border: 1px solid #83aaff;
+  background: #17265e;
+  color: #cce5ff;
+  border-radius: 4px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.filter.active {
+  background: #12a4e8;
+  border-color: #b5f6ff;
+  color: white;
+}
+
+.tier {
+  margin: 14px 0 7px;
+  font-weight: 950;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tier-count {
+  font-size: 11px;
+  color: #9dcaff;
+  font-weight: 700;
+}
+
+.roster-grid {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.roster-item {
+  border: 1px solid #80dfff;
+  border-radius: 5px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 35% 25%, #6194ef, #20255f);
+  font-size: clamp(13px, 1.5vw, 21px);
+  position: relative;
+  min-width: 0;
+  transition: transform .15s, outline .15s;
+}
+
+.roster-item:hover {
+  transform: scale(1.08);
+  outline: 2px solid #4de4ff;
+  z-index: 1;
+}
+
+.roster-item .tiny-trophy {
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  font-size: 9px;
+  background: #06142f;
+  border-radius: 8px;
+  padding: 1px 3px;
+}
+
+.tiers-panel .section-title {
+  font-size: 16px;
+}
+
+.tier-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 0;
+  border-bottom: 1px solid #5967c4;
+}
+
+.tier-row:last-child {
+  border-bottom: 0;
+}
+
+.tier-badge {
+  width: 35px;
+  height: 35px;
+  display: grid;
+  place-items: center;
+  font-size: 25px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 0 #0007);
+}
+
+.tier-label {
+  font-weight: 900;
+  font-size: 14px;
+}
+
+.tier-range {
+  font-size: 12px;
+  color: #e2e8ff;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.stats {
+  margin-top: 14px;
+  padding: 15px;
+  border-radius: 5px;
+  background: linear-gradient(100deg, #1744bd, #4426a7);
+  border-color: #0b1232;
+}
+
+.stats-title {
+  font-weight: 950;
+  font-size: 20px;
+  text-transform: uppercase;
+  margin: 0 0 15px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: #fff;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 9px;
+  border-right: 1px solid #7185df;
+  min-width: 0;
+}
+
+.stat:last-child {
+  border-right: 0;
+}
+
+.stat-icon {
+  font-size: clamp(25px, 3vw, 40px);
+  flex-shrink: 0;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: #d8e4ff;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.stat-value {
+  font-size: clamp(17px, 2vw, 28px);
+  font-weight: 1000;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.rank-value {
+  color: #ff6eaa;
+}
+
+.edit-note {
+  color: #e0e8ff;
+  font-size: 12px;
+  text-align: center;
+  margin: 12px 0 0;
+}
+
+.edit-button {
+  display: block;
+  margin: 12px auto 0;
+  border: 1px solid #2287dc;
+  background: #0b3b7c;
+  color: white;
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: #000b;
+  display: none;
+  place-items: center;
+  padding: 18px;
+  z-index: 5;
+}
+
+.modal-backdrop.open {
+  display: grid;
+}
+
+.modal {
+  width: min(430px, 100%);
+  padding: 20px;
+  border: 1px solid #268be3;
+  border-radius: 18px;
+  background: #081a3b;
+  box-shadow: 0 20px 70px #0009;
+}
+
+.modal h2 {
+  margin: 0 0 14px;
+}
+
+.field {
+  display: grid;
+  gap: 5px;
+  margin: 12px 0;
+}
+
+.field label {
+  font-size: 12px;
+  color: #9bcaff;
+  font-weight: 800;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 9px;
+  border: 1px solid #285b91;
+  background: #06132b;
+  color: white;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.modal-actions button {
+  border-radius: 9px;
+  padding: 9px 14px;
+  border: 1px solid #2b76b5;
+  background: #0b3e7a;
+  color: white;
+  font-weight: 800;
+}
+
+@media (max-width: 950px) {
+  .profile-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .left-panel {
+    border-width: 0 0 5px;
+    border-right: 0;
+    border-bottom-color: #080a20;
+  }
+
+  .avatar-frame {
+    max-width: 320px;
+  }
+
+  .avatar {
+    aspect-ratio: 1;
+  }
+
+  .left-bottom {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .content-grid {
+    grid-template-columns: minmax(0, 1fr) 220px;
+  }
+}
+
+@media (max-width: 650px) {
+  .page {
+    padding: 5px;
+  }
+
+  .profile-shell {
+    border-width: 3px;
+  }
+
+  .left-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .roster-preview {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .roster-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stat {
+    border-right: 0;
+    border-bottom: 1px solid #7185df;
+    padding: 10px 5px;
+  }
+
+  .stat:last-child {
+    grid-column: 1 / -1;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+  <header class="profile-shell">
+    <aside class="left-panel">
+      <div class="avatar-frame">
+        <div class="avatar" id="avatar">🥷</div>
+      </div>
+
+      <h1 class="player-name" id="playerName">ShadowRider</h1>
+      <div class="rule"></div>
+
+      <div class="left-bottom">
+        <section>
+          <h2 class="subhead">Battle Cards</h2>
+          <div class="battle-cards" id="battleCards">
+            <div class="battle-card">🤠</div>
+            <div class="battle-card">💀</div>
+            <div class="battle-card">🦈</div>
+          </div>
+        </section>
+
+        <section class="title-box">
+          <div class="subhead">Title</div>
+          <div class="title-emblem">🌟</div>
+          <div class="title-name" id="playerTitle">The Untamed</div>
+        </section>
+      </div>
+    </aside>
+
+    <main class="main-panel">
+      <div class="topbar">
+        <section class="top-card">
+          <div class="top-icon">🔥</div>
+          <div>
+            <div class="eyebrow">Fame</div>
+            <div class="top-value gold" id="fame">1,248</div>
+          </div>
+        </section>
+
+        <section class="top-card">
+          <div class="top-icon">#️⃣</div>
+          <div>
+            <div class="eyebrow">Profile ID</div>
+            <div class="top-value" id="profileId">#8J2K9VQ</div>
+          </div>
+        </section>
+
+        <section class="top-card">
+          <div class="top-icon">👤</div>
+          <div style="min-width:0">
+            <div class="eyebrow">Username</div>
+            <div class="top-value" id="username">ShadowRider</div>
+          </div>
+        </section>
+      </div>
+
+      <div class="content-grid">
+        <section class="section-card">
+          <h2 class="section-title">
+            <span>🏆 Highest Trophy Brawlers</span>
+            <button class="toggle" id="highestToggle"
+              aria-label="Toggle highest brawlers"
+              aria-expanded="false">⌄</button>
+          </h2>
+
+          <div class="highest" id="highestBrawlers"></div>
+          <div class="roster-preview" id="rosterPreview"></div>
+
+          <button class="roster-toggle" id="rosterToggle"
+            aria-expanded="false">
+            All brawlers <span id="rosterArrow">⌄</span>
+          </button>
+
+          <div class="roster" id="roster">
+            <div class="roster-controls" id="filters">
+              <button class="filter active" data-filter="all">All brawlers</button>
+              <button class="filter" data-filter="star">Star / Prestige</button>
+              <button class="filter" data-filter="diamond">Diamond</button>
+              <button class="filter" data-filter="gold">Gold</button>
+              <button class="filter" data-filter="silver">Silver</button>
+              <button class="filter" data-filter="bronze">Bronze</button>
+            </div>
+            <div id="rosterGroups"></div>
+          </div>
+        </section>
+
+        <aside class="section-card tiers-panel">
+          <h2 class="section-title">Brawlers by rank</h2>
+
+          <div class="tier-row">
+            <div class="tier-badge">💠</div>
+            <div class="tier-label">Star / Prestige</div>
+            <div class="tier-range">1000+</div>
+          </div>
+
+          <div class="tier-row">
+            <div class="tier-badge">🔷</div>
+            <div class="tier-label">Diamond</div>
+            <div class="tier-range">750–999</div>
+          </div>
+
+          <div class="tier-row">
+            <div class="tier-badge">🟡</div>
+            <div class="tier-label">Gold</div>
+            <div class="tier-range">500–749</div>
+          </div>
+
+          <div class="tier-row">
+            <div class="tier-badge">⚪</div>
+            <div class="tier-label">Silver</div>
+            <div class="tier-range">250–499</div>
+          </div>
+
+          <div class="tier-row">
+            <div class="tier-badge">🟤</div>
+            <div class="tier-label">Bronze</div>
+            <div class="tier-range">0–249</div>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </header>
+
+  <section class="stats">
+    <h2 class="stats-title">📊 Your Stats</h2>
+
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-icon">🔥</div>
+        <div>
+          <div class="stat-label">Best Win Streak</div>
+          <div class="stat-value" id="streak">12</div>
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-icon">🏆</div>
+        <div>
+          <div class="stat-label">Total Trophies</div>
+          <div class="stat-value" id="totalTrophies">38,542</div>
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-icon">💀</div>
+        <div>
+          <div class="stat-label">Showdown Wins</div>
+          <div class="stat-value" id="showdownWins">1,482</div>
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-icon">👥</div>
+        <div>
+          <div class="stat-label">Team Match Wins</div>
+          <div class="stat-value" id="teamWins">987</div>
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-icon">🛡️</div>
+        <div>
+          <div class="stat-label">Rank</div>
+          <div class="stat-value rank-value" id="playerRank">MYTHIC</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <button class="edit-button" id="editOpen">✎ Customize profile</button>
+  <p class="edit-note">
+    Fan-made profile template • Sample data is editable • Not affiliated with Supercell
+  </p>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop"
+  role="dialog" aria-modal="true" aria-labelledby="editHeading">
+
+  <div class="modal">
+    <h2 id="editHeading">Customize profile</h2>
+
+    <div class="field">
+      <label for="editName">Player name</label>
+      <input id="editName" value="ShadowRider" maxlength="28">
+    </div>
+
+    <div class="field">
+      <label for="editUsername">Username</label>
+      <input id="editUsername" value="ShadowRider" maxlength="28">
+    </div>
+
+    <div class="field">
+      <label for="editId">Profile ID</label>
+      <input id="editId" value="#8J2K9VQ" maxlength="18">
+    </div>
+
+    <div class="field">
+      <label for="editTitle">Title</label>
+      <input id="editTitle" value="The Untamed" maxlength="32">
+    </div>
+
+    <div class="field">
+      <label for="editFame">Fame</label>
+      <input id="editFame" type="number" min="0" value="1248">
+    </div>
+
+    <div class="field">
+      <label for="editRank">Player rank</label>
+      <select id="editRank">
+        <option>Bronze</option>
+        <option>Silver</option>
+        <option>Gold</option>
+        <option>Diamond</option>
+        <option>Mythic</option>
+        <option>Legendary</option>
+        <option>Master</option>
+        <option>Pro</option>
+      </select>
+    </div>
+
+    <div class="modal-actions">
+      <button id="editCancel">Cancel</button>
+      <button id="editSave">Save changes</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const brawlers = [
+  ["8-Bit", "🕹️", 788],
+  ["Alli", "⭐", 0],
+  ["Amber", "🔥", 0],
+  ["Angelo", "🏹", 351],
+  ["Ash", "🧹", 447],
+  ["Barley", "🍾", 729],
+  ["Bea", "🐝", 557],
+  ["Belle", "🤠", 459],
+  ["Berry", "🍦", 339],
+  ["Bibi", "⚾", 570],
+  ["Bo", "🏹", 810],
+  ["Bolt", "⚡", 0],
+  ["Bonnie", "🚀", 496],
+  ["Brock", "🚀", 842],
+  ["Bull", "🐂", 864],
+  ["Buster", "🎬", 112],
+  ["Buzz", "🦖", 172],
+  ["Byron", "🧪", 220],
+  ["Carl", "⛏️", 648],
+  ["Charlie", "🕷️", 52],
+  ["Chester", "🤡", 0],
+  ["Chuck", "🚂", 64],
+  ["Clancy", "🦀", 8],
+  ["Colette", "📚", 471],
+  ["Colt", "🤠", 982],
+  ["Cordelius", "⭐", 0],
+  ["Cosmo", "⭐", 0],
+  ["Crow", "🐦", 0],
+  ["Damian", "⭐", 0],
+  ["Darryl", "🛢️", 674],
+  ["Doug", "🌭", 76],
+  ["Draco", "⭐", 0],
+  ["Dynamike", "🧨", 827],
+  ["Edgar", "🧣", 531],
+  ["El Primo", "🥊", 740],
+  ["Emz", "💜", 770],
+  ["Eve", "🛸", 148],
+  ["Fang", "👟", 160],
+  ["Finx", "⭐", 0],
+  ["Frank", "🔨", 582],
+  ["Gale", "🌬️", 484],
+  ["Gene", "🧞", 267],
+  ["Gigi", "⭐", 0],
+  ["Glowy", "⭐", 0],
+  ["Gray", "🎩", 100],
+  ["Griff", "💵", 519],
+  ["Grom", "💥", 508],
+  ["Gus", "👻", 635],
+  ["Hank", "🦐", 387],
+  ["Jacky", "⛏️", 689],
+  ["Jae-Yong", "⭐", 0],
+  ["Janet", "🎤", 136],
+  ["Jessie", "🧢", 901],
+  ["Juju", "🔮", 0],
+  ["Kaze", "🌀", 0],
+  ["Kenji", "⚔️", 0],
+  ["Kit", "🐱", 0],
+  ["Larry & Lawrie", "🚨", 363],
+  ["Leon", "🦎", 0],
+  ["Lily", "🌺", 16],
+  ["Lola", "🎭", 435],
+  ["Lou", "🍦", 196],
+  ["Lumi", "⭐", 0],
+  ["Maisie", "🎯", 399],
+  ["Mandy", "🍬", 411],
+  ["Max", "⚡", 255],
+  ["Meg", "🤖", 0],
+  ["Meeple", "🎲", 315],
+  ["Melodie", "🎵", 28],
+  ["Mico", "🐒", 40],
+  ["Mina", "⭐", 0],
+  ["Moe", "🐭", 303],
+  ["Mortis", "🦇", 291],
+  ["Mr. P", "🐧", 244],
+  ["Najia", "⭐", 0],
+  ["Nani", "👁️", 544],
+  ["Nita", "🐻", 880],
+  ["Nori", "⭐", 0],
+  ["Ollie", "⭐", 0],
+  ["Otis", "🎨", 124],
+  ["Pam", "🛠️", 597],
+  ["Pearl", "🍪", 375],
+  ["Penny", "🏴‍☠️", 660],
+  ["Pierce", "⭐", 0],
+  ["Piper", "🎯", 609],
+  ["Poco", "🎸", 712],
+  ["R-T", "📡", 0],
+  ["Rico", "🤖", 954],
+  ["Rosa", "🌿", 701],
+  ["Ruffs", "🐶", 184],
+  ["Sam", "🥊", 423],
+  ["Sandy", "😴", 0],
+  ["Shade", "👻", 327],
+  ["Shelly", "🔫", 1025],
+  ["Sirius", "⭐", 0],
+  ["Spike", "🌵", 930],
+  ["Sprout", "🌱", 232],
+  ["Squeak", "💧", 208],
+  ["Starr Nova", "⭐", 0],
+  ["Stu", "🏍️", 754],
+  ["Surge", "⚡", 0],
+  ["Tara", "🔮", 279],
+  ["Tick", "💣", 799],
+  ["Trunk", "⭐", 0],
+  ["Wendy", "⭐", 0],
+  ["Willow", "🐸", 88],
+  ["Ziggy", "🦎", 0]
+];
+
+function tierFor(trophies) {
+  if (trophies >= 1000) return "star";
+  if (trophies >= 750) return "diamond";
+  if (trophies >= 500) return "gold";
+  if (trophies >= 250) return "silver";
+  return "bronze";
+}
+
+const tierInfo = {
+  star: {
+    label: "Star / Prestige",
+    range: "1000+ trophies",
+    badge: "💠"
+  },
+  diamond: {
+    label: "Diamond",
+    range: "750–999 trophies",
+    badge: "🔷"
+  },
+  gold: {
+    label: "Gold",
+    range: "500–749 trophies",
+    badge: "🟡"
+  },
+  silver: {
+    label: "Silver",
+    range: "250–499 trophies",
+    badge: "⚪"
+  },
+  bronze: {
+    label: "Bronze",
+    range: "0–249 trophies",
+    badge: "🟤"
+  }
+};
+
+function makeCard(brawler) {
+  return `
+    <div class="brawler-card" title="${brawler[0]}">
+      <div class="brawler-face">${brawler[1]}</div>
+      <div class="trophies">🏆 ${brawler[2].toLocaleString()}</div>
+    </div>
+  `;
+}
+
+function renderHighest() {
+  const highest = brawlers
+    .slice()
+    .sort((a, b) => b[2] - a[2])
+    .slice(0, 5);
+
+  document.getElementById("highestBrawlers").innerHTML =
+    highest.map(makeCard).join("");
+}
+
+function renderPreview() {
+  document.getElementById("rosterPreview").innerHTML =
+    brawlers.slice(5, 25).map(brawler => `
+      <div class="mini-brawler" title="${brawler[0]}">
+        ${brawler[1]}
+      </div>
+    `).join("");
+}
+
+function renderRoster(filter = "all") {
+  const groups = document.getElementById("rosterGroups");
+
+  const keys = filter === "all"
+    ? ["star", "diamond", "gold", "silver", "bronze"]
+    : [filter];
+
+  groups.innerHTML = keys.map(key => {
+    const list = brawlers.filter(
+      brawler => tierFor(brawler[2]) === key
+    );
+
+    return `
+      <div class="tier">
+        <span>${tierInfo[key].badge}</span>
+        ${tierInfo[key].label}
+        <span class="tier-count">
+          (${list.length} brawlers · ${tierInfo[key].range})
+        </span>
+      </div>
+
+      <div class="roster-grid">
+        ${list.map(brawler => `
+          <div
+            class="roster-item"
+            title="${brawler[0]} — ${brawler[2]} trophies"
+            aria-label="${brawler[0]}, ${brawler[2]} trophies">
+            ${brawler[1]}
+            <span class="tiny-trophy">${brawler[2]}</span>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  }).join("");
+}
+
+renderHighest();
+renderPreview();
+renderRoster();
+
+const roster = document.getElementById("roster");
+const rosterToggle = document.getElementById("rosterToggle");
+
+rosterToggle.addEventListener("click", () => {
+  const open = !roster.classList.contains("open");
+
+  roster.classList.toggle("open", open);
+  rosterToggle.setAttribute("aria-expanded", String(open));
+
+  document.getElementById("rosterArrow").textContent =
+    open ? "⌃" : "⌄";
+});
+
+const highestToggle = document.getElementById("highestToggle");
+
+highestToggle.addEventListener("click", () => {
+  const expanded =
+    highestToggle.getAttribute("aria-expanded") === "true";
+
+  highestToggle.setAttribute(
+    "aria-expanded",
+    String(!expanded)
+  );
+
+  document.getElementById("highestBrawlers").style.display =
+    expanded ? "grid" : "none";
+
+  highestToggle.textContent = expanded ? "⌄" : "⌃";
+});
+
+document.getElementById("filters").addEventListener("click", event => {
+  const button = event.target.closest("[data-filter]");
+
+  if (!button) return;
+
+  document.querySelectorAll(".filter").forEach(item => {
+    item.classList.toggle("active", item === button);
+  });
+
+  renderRoster(button.dataset.filter);
+});
+
+const backdrop = document.getElementById("modalBackdrop");
+
+document.getElementById("editOpen").addEventListener("click", () => {
+  backdrop.classList.add("open");
+});
+
+document.getElementById("editCancel").addEventListener("click", () => {
+  backdrop.classList.remove("open");
+});
+
+backdrop.addEventListener("click", event => {
+  if (event.target === backdrop) {
+    backdrop.classList.remove("open");
+  }
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    backdrop.classList.remove("open");
+  }
+});
+
+document.getElementById("editSave").addEventListener("click", () => {
+  const name =
+    document.getElementById("editName").value.trim() || "Player";
+
+  const username =
+    document.getElementById("editUsername").value.trim() || name;
+
+  const title =
+    document.getElementById("editTitle").value.trim();
+
+  document.getElementById("playerName").textContent = name;
+  document.getElementById("username").textContent = username;
+
+  document.getElementById("profileId").textContent =
+    document.getElementById("editId").value.trim() || "#—";
+
+  document.getElementById("playerTitle").textContent =
+    title || "No title selected";
+
+  document.getElementById("fame").textContent =
+    Math.max(
+      0,
+      Number(document.getElementById("editFame").value) || 0
+    ).toLocaleString();
+
+  document.getElementById("playerRank").textContent =
+    document.getElementById("editRank").value.toUpperCase();
+
+  backdrop.classList.remove("open");
+});
+</script>
+</body>
+</html>
